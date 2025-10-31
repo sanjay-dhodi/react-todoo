@@ -12,5 +12,6 @@ See Live App on https://sanjaydhodi-react-todoo.netlify.app/
 
 - connect with backend
 - code sepration & react component sepration
+- validation
 
 Thanks For Visting 
