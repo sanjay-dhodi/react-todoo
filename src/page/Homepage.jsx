@@ -122,7 +122,7 @@ export default function Homepage() {
       <div className="join mb-5">
         <div className="btn join-item bg-black text-white"> Note </div>
         <p className="join-item bg-amber-200 flex items-center justify-center px-2 ">
-          Refactor needed might some feature does not work
+          working on fixing issue
         </p>
       </div>
 
