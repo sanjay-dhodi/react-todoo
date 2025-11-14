@@ -4,11 +4,19 @@ import React, { useState } from "react";
 export default function Homepage() {
   const [inputText, setInputText] = useState("");
   const [taskData, setTaskData] = useState([]);
-  // const [updateInput, setUpdateInput] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   // form submit handle
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!inputText) {
+      setSuccess("");
+      setError("Input Required");
+
+      return;
+    }
 
     const data = {
       name: inputText,
@@ -19,10 +27,13 @@ export default function Homepage() {
 
     setTaskData([...taskData, data]);
     setInputText("");
+    setSuccess("Task Created");
   }
 
   // input field handle
   function handleInputText(e) {
+    setError("");
+    setSuccess("");
     setInputText(e.target.value);
   }
 
@@ -38,6 +49,8 @@ export default function Homepage() {
   // delete task
   function handleDelete(index) {
     const updatedTask = taskData.filter((_, i) => i !== index);
+    setError("");
+    setSuccess("task Deleted");
     setTaskData(updatedTask);
   }
 
@@ -46,9 +59,8 @@ export default function Homepage() {
     const newTaskData = taskData.map((task, i) =>
       i === index ? { ...task, isEditing: !task.isEditing } : task
     );
-
-    // console.log(newTaskData);
-
+    setError("");
+    setSuccess("");
     setTaskData(newTaskData);
   }
 
@@ -63,12 +75,24 @@ export default function Homepage() {
           }
         : task
     );
-
+    setInputText(e.target.value);
     setTaskData(updatedData);
   }
 
   // UpdateSave
   function handleUpdateSave(index) {
+    setError("");
+    setSuccess("");
+
+    if (!inputText) {
+      setSuccess("");
+      setError("Input Required");
+      return;
+    }
+
+    console.log(taskData);
+    console.log(inputText);
+
     const newTaskData = taskData.map((task, i) =>
       i === index
         ? {
@@ -78,11 +102,15 @@ export default function Homepage() {
           }
         : task
     );
+    setError("");
+    setSuccess("update successfull");
     setTaskData(newTaskData);
   }
 
   // handleUpdateCancel
   function handleUpdateCancel(index) {
+    setError("");
+    setSuccess("");
     const newTaskData = taskData.map((task, i) =>
       i === index ? { ...task, isEditing: false } : task
     );
@@ -91,9 +119,28 @@ export default function Homepage() {
 
   return (
     <div className="mx-auto w-fit p-5 card shadow-sm bg-white flex flex-column ">
+      <div className="join mb-5">
+        <div className="btn join-item bg-black text-white"> Note </div>
+        <p className="join-item bg-amber-200 flex items-center justify-center px-2 ">
+          Refactor needed might some feature does not work
+        </p>
+      </div>
+
       <h1 className="font-bold text-2xl text-center mb-5"> React Todoo</h1>
 
       <form onSubmit={handleSubmit} className="w-fit self-center">
+        {error && (
+          <p className="bg-red-300 p-3 text-red-600 w-full my-4">
+            <span>{error}</span>
+          </p>
+        )}
+
+        {success && (
+          <p className="bg-green-300 p-3 text-green-600 w-full my-4">
+            <span>{success}</span>
+          </p>
+        )}
+
         <div className="join">
           <input
             type="text"
