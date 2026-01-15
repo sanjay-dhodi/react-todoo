@@ -35,10 +35,11 @@ The main purpose of this project was to practice and strengthen core React conce
 ## 📂 Project Status
 Completed.
 
+## live link  
+https://sanjay-dhodi-react-todoo.netlify.app/
+
 ## 🙌 Author
 **Sanjay Dhodi**  
 Aspiring Software Developer
 
-
-live link : https://sanjay-dhodi-react-todoo.netlify.app/
 
